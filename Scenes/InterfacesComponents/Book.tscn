@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://d8iwfctro38b"]
+
+[ext_resource type="Script" uid="uid://7h3rya570pl6" path="res://Scripts/InterfaceComponent/book.gd" id="1_na1an"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_na1an"]
+bg_color = Color(0.4509804, 0.30980393, 0.19215687, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 5
+shadow_offset = Vector2(0, 5)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cu3gp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wn11f"]
+bg_color = Color(0.4509804, 0.30980393, 0.19215687, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 5
+
+[sub_resource type="LabelSettings" id="LabelSettings_na1an"]
+font_size = 32
+
+[node name="Button" type="Button" unique_id=2020428515 node_paths=PackedStringArray("text_label")]
+custom_minimum_size = Vector2(100, 500)
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -500.0
+offset_right = 100.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.8784314, 0.8784314, 0.8784314, 1)
+theme_override_colors/font_hover_color = Color(0.8784314, 0.8784314, 0.8784314, 1)
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_na1an")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_na1an")
+theme_override_styles/hover = SubResource("StyleBoxFlat_na1an")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_cu3gp")
+theme_override_styles/focus = SubResource("StyleBoxFlat_wn11f")
+toggle_mode = true
+text_overrun_behavior = 3
+autowrap_mode = 1
+script = ExtResource("1_na1an")
+text_label = NodePath("Label")
+
+[node name="Label" type="Label" parent="." unique_id=248967410]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_right = 500.0
+offset_bottom = 100.0
+grow_vertical = 0
+rotation = -1.5707964
+text = "Caderneta"
+label_settings = SubResource("LabelSettings_na1an")
+horizontal_alignment = 1
+vertical_alignment = 1

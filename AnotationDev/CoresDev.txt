@@ -1,0 +1,7 @@
+Cor Base	Tom Claro (Highlight)	Meio Tom (Base/Mid)	Tom Escuro (Shadow)	Uso Sugerido
+Papel/Creme	       #FFF9F0	#F1E4D1	#D9C5B2	Páginas, brilho do papel, bordas.
+Marrom/Couro	   #A67C52	#734F31	#3D2B1F	Capas de livro, lombadas, texturas.
+Vermelho/Vinho	   #E57373	#B71C1C	#4B1010	Detalhes da capa, fitas marcadoras.
+Verde/Musgo	       #A5D6A7	#4E6E41	#2D3B26	Capas vintage, elementos de natureza.
+Azul/Marinho	   #90CAF9	#3F51B5	#1A237E	Tinta de caneta, capas institucionais.
+Cinza/Grafite	   #E0E0E0	#757575	#212121	Texto (grafite), sombras projetadas.

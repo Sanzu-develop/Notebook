@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="LineData" load_steps=2 format=3 uid="uid://cfo0lwr26yyjk"]
+
+[ext_resource type="Script" uid="uid://c7woc2dd0bb2m" path="res://Resources/BooksComponentsGD/DrawObjects/Line.gd" id="1_dfjnl"]
+
+[resource]
+script = ExtResource("1_dfjnl")
+size = Vector2(440, 32)
+type = "ComumLine"
+metadata/_custom_type_script = "uid://c7woc2dd0bb2m"

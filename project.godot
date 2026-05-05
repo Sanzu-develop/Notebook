@@ -1,0 +1,46 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
+[application]
+
+config/name="Cadernist"
+config/description="Cadern for all necessity"
+config/version="0.1"
+run/main_scene="uid://du40nhq2gro4e"
+config/features=PackedStringArray("4.6", "Mobile")
+config/icon="res://icon.svg"
+
+[autoload]
+
+SceneFactory="*res://Global/SceneFactory.gd"
+FileManager="*res://Global/FileManager.gd"
+NotebookManager="*res://Global/NotebookManager.gd"
+
+[display]
+
+window/size/viewport_width=1440
+window/size/viewport_height=720
+window/size/mode=2
+window/size/window_width_override=2160
+window/size/window_height_override=1080
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
+[global_group]
+
+Block="Block cam move for click"
+
+[rendering]
+
+renderer/rendering_method="mobile"

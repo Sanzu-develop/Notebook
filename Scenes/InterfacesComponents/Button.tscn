@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://bf2wotbb7unu8"]
+
+[ext_resource type="StyleBox" uid="uid://c2fs6miynhgbw" path="res://Styles/Interface/Button_Normal.tres" id="1_eflgw"]
+[ext_resource type="StyleBox" uid="uid://dtukok2fl7asn" path="res://Styles/Interface/Button_Focus.tres" id="2_a3uhu"]
+[ext_resource type="StyleBox" uid="uid://7ksb3vxmjij7" path="res://Styles/Interface/Button_Disable.tres" id="2_ev0xg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c2jbf"]
+
+[node name="B" type="Button"]
+custom_minimum_size = Vector2(25, 50)
+theme_override_colors/font_color = Color(0.45882353, 0.45882353, 0.45882353, 1)
+theme_override_colors/font_focus_color = Color(0.8784314, 0.8784314, 0.8784314, 1)
+theme_override_colors/font_pressed_color = Color(0.8784314, 0.8784314, 0.8784314, 1)
+theme_override_colors/font_disabled_color = Color(0.12941177, 0.12941177, 0.12941177, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = ExtResource("1_eflgw")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_c2jbf")
+theme_override_styles/hover = ExtResource("2_a3uhu")
+theme_override_styles/disabled = ExtResource("2_ev0xg")
+theme_override_styles/focus = ExtResource("2_a3uhu")
+text = "abu"

@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://hn6aipmcpk3d"]
+
+[ext_resource type="StyleBox" uid="uid://bua06gr7hc1uq" path="res://Styles/Interface/LineNornal.tres" id="1_r0xgq"]
+[ext_resource type="Script" uid="uid://b6pbdgd1d6no8" path="res://Scenes/BooksComponents/ComumLine.gd" id="1_vxwgk"]
+[ext_resource type="StyleBox" uid="uid://dn46v7xqkaav3" path="res://Styles/Interface/LineFocus.tres" id="2_btrm1"]
+
+[node name="Line" type="LineEdit" unique_id=624848335 groups=["Block"]]
+custom_minimum_size = Vector2(64, 32)
+offset_right = 68.5625
+offset_bottom = 32.0
+theme_override_colors/font_color = Color(0.45882353, 0.45882353, 0.45882353, 1)
+theme_override_colors/font_selected_color = Color(0.8784314, 0.8784314, 0.8784314, 1)
+theme_override_styles/normal = ExtResource("1_r0xgq")
+theme_override_styles/focus = ExtResource("2_btrm1")
+deselect_on_focus_loss_enabled = false
+script = ExtResource("1_vxwgk")
+
+[connection signal="text_changed" from="." to="." method="interact"]

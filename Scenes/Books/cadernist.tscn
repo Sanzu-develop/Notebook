@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://dlanoeaov7e2l"]
+
+[ext_resource type="Script" uid="uid://jtg7m4rj81c5" path="res://Scripts/Book/cadernist.gd" id="1_fccmf"]
+[ext_resource type="PackedScene" uid="uid://osbyi5o0tgdh" path="res://Scenes/BooksComponents/Page.tscn" id="2_iuolp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sviko"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.4509804, 0.30980393, 0.19215687, 1)
+border_width_left = 60
+border_width_top = 30
+border_width_right = 60
+border_width_bottom = 30
+border_color = Color(0.23921569, 0.16862746, 0.12156863, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="Cadernist" type="Panel" unique_id=2165359 node_paths=PackedStringArray("list_pages")]
+clip_contents = true
+custom_minimum_size = Vector2(1200, 660)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -600.0
+offset_top = -330.0
+offset_right = 600.0
+offset_bottom = 330.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_sviko")
+script = ExtResource("1_fccmf")
+list_pages = NodePath("MaCo/ListPages")
+Page = ExtResource("2_iuolp")
+
+[node name="MaCo" type="MarginContainer" parent="." unique_id=880083535]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 60
+theme_override_constants/margin_bottom = 30
+
+[node name="ListPages" type="HBoxContainer" parent="MaCo" unique_id=780128489]
+custom_minimum_size = Vector2(1200, 0)
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1

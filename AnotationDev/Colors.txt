@@ -1,0 +1,13 @@
+Cor 	        Hex.Code    Uso Sugerido na Godot
+Marrom Café	    #3A2317  	Fundo (CanvasModulate) ou sombras.
+Marrom Suave	#8C6E52  	Plataformas, troncos ou botões principais.
+Bege Calmo	    #F3E8D9  	Texto da UI ou luzes ambientes suaves.
+Verde Musgo	    #A4AC9F  	Detalhes de vegetação ou elementos de destaque.
+
+
+
+
+Sombra Intensa:   #3A1E22 (Excelente para ColorRect de fundo).
+Marrom Rosado:    #9A7B78 (Para elementos de meio-tom).
+Terracota Suave:  #B78876 (Destaque para personagens ou itens).
+Creme Vintage:    #F4DECB (Fundo de janelas ou ícones).
