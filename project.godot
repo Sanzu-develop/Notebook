@@ -19,7 +19,7 @@ config/description="Cadern for all necessity"
 config/version="0.1"
 run/main_scene="uid://du40nhq2gro4e"
 config/features=PackedStringArray("4.6", "Mobile")
-config/icon="res://icon.svg"
+config/icon="uid://b56wm6smx85bx"
 
 [autoload]
 
