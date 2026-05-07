@@ -6,7 +6,7 @@ extends Camera2D
 @export var zoom_min := 0.5
 @export var zoom_max := 3.0
 
-var can_move_camera := false
+var enable_move_camera := false
 var touch_points := {} 
 var last_distance := 0.0
 
@@ -18,11 +18,11 @@ func _input(event: InputEvent) -> void:
 			# Verificação crucial: Só permitimos mover se o toque inicial 
 			# NÃO for em um elemento do grupo "Block"
 			if event.index == 0:
-				can_move_camera = not is_pos_blocking_ui(event.position)
+				enable_move_camera = not is_pos_blocking_ui(event.position)
 		else:
 			touch_points.erase(event.index)
 			if event.index == 0:
-				can_move_camera = false
+				enable_move_camera = false
 			if touch_points.size() < 2:
 				last_distance = 0.0
 
@@ -45,7 +45,7 @@ func _input(event: InputEvent) -> void:
 			last_distance = current_distance
 		
 		# MOVIMENTO COM UM DEDO
-		elif touch_points.size() == 1 and can_move_camera:
+		elif touch_points.size() == 1 and enable_move_camera:
 			# Multiplicamos pela escala do zoom para o arrasto ser preciso
 			global_position -= event.relative * (1.0 / zoom.x) * sensibility_move
 

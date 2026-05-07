@@ -120,30 +120,9 @@ func create_notebook_cache(notebook_path : String, notebook_resource : NotebookD
 
 ## Get
 
-func get_notebook_selected() -> NotebookData:
-	var current_notebook : NotebookData = null #= notebooks["Notebook"][notebook_path]["Resource"]
-	
-	if not has_selected(): return current_notebook
-	
-	var result_dict = get_current_select(0)
-	var poled_dict_path = result_dict.keys()[0]
-	current_notebook = notebooks["Selected"][poled_dict_path]["Resource"]
-	
-	return current_notebook
-
 func get_notebook_in_name(notebook_path : String) -> NotebookData:
 	if not notebooks["Notebook"].has(notebook_path) : return null
 	return notebooks["Notebook"][notebook_path]["Resource"]
-
-func get_notebook_selected_key() -> String:
-	var key : String = "" #= notebooks["Notebook"][notebook_path]["Resource"]
-	
-	if not has_selected(): return key
-	
-	var result_dict = get_current_select(0)
-	key = result_dict.keys()[0]
-	
-	return key
 
 func get_current_select(index := -1) -> Dictionary:
 	if not has_selected(): return {}
@@ -151,8 +130,8 @@ func get_current_select(index := -1) -> Dictionary:
 	var list = notebooks["Selected"]
 	var current_selected : Dictionary = {}
 	
-	if index == -1: return list
-	elif index > -1:
+	if index <= -1: return list
+	else:
 		var id_c := 0
 		for key in list.keys():
 			if index == id_c:

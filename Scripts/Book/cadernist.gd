@@ -9,21 +9,33 @@ extends Panel
 @export_category("Resources")
 @export var notebook : NotebookData
 
+@export_category("Paths")
+@export var path_name : String
+
 @export_category("Packs")
 @export var Page : PackedScene
 
 var pages : Dictionary[int,Control] = {}
 
 
-var ok := false
+func _gui_input(event: InputEvent) -> void:
+	# Ativa ou desativa a câmera
+	if event is InputEventScreenTouch:
+		var camera_target : Camera2D = get_tree().current_scene.cam
+		
+		camera_target.set_process_input(not event.pressed)
+		
+		if event.pressed :
+			var parent = get_parent()
+			
+			parent.move_child(self,-1)
+			
+			NotebookManager.select_notebook(path_name,false)
 
-signal go
-
-
-func _ready() -> void:
-	await get_tree().process_frame
-	ok = true
-	go.emit()
+	# Move o caderno
+	if event is InputEventScreenDrag:
+		global_position += event.relative
+	
 
 func go_to(local : Vector2):
 	var current_offset := Vector2(-size.x / 2, size.y / 2)
@@ -32,10 +44,11 @@ func go_to(local : Vector2):
 	var tween = create_tween()
 	tween.tween_property(self,"global_position",delta_move,0.3)
 
-func load_notebook(new : NotebookData):
+func load_notebook(new : NotebookData, new_path : String):
 	notebook = new#.duplicate(true)
+	path_name = new_path
 	
-	if not ok: await go
+	if not is_inside_tree(): await self.ready
 	
 	for i in list_pages.get_children():
 		i.queue_free()

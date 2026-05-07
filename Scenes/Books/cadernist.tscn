@@ -34,7 +34,6 @@ offset_right = 600.0
 offset_bottom = 330.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_sviko")
 script = ExtResource("1_fccmf")
 list_pages = NodePath("MaCo/ListPages")
