@@ -18,8 +18,10 @@ config/name="Cadernist"
 config/description="Cadern for all necessity"
 config/version="0.1"
 run/main_scene="uid://du40nhq2gro4e"
+config/quit_on_go_back=false
 config/features=PackedStringArray("4.6", "Mobile")
-config/icon="uid://b56wm6smx85bx"
+config/icon="uid://dbsi66l12q5c5"
+boot_splash/image="uid://cmu1w01nya2ia"
 
 [autoload]
 

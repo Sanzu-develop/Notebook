@@ -4,13 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://dlanoeaov7e2l" path="res://Scenes/Books/cadernist.tscn" id="2_1p38k"]
 [ext_resource type="Script" uid="uid://brylbtcymecsg" path="res://Scripts/Camera/camera.gd" id="2_k7yof"]
 [ext_resource type="Script" uid="uid://b0jst32huqnf" path="res://Global/NotebookManager.gd" id="4_rro8m"]
+[ext_resource type="Theme" uid="uid://duocja3dhftvk" path="res://Styles/Interface/Base_Superior_Editor.res" id="5_rro8m"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1p38k"]
+load_path = "res://.godot/imported/Icon.png-da58a5c6d89c120476e4c1572984e165.ctex"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kprgi"]
 bg_color = Color(0.6, 0.6666667, 0.6, 1)
-
-[sub_resource type="Theme" id="Theme_1p38k"]
-default_font_size = 32
-Button/constants/outline_size = 5
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1p38k"]
 
@@ -25,6 +25,24 @@ script = ExtResource("1_k7yof")
 cam = NodePath("Camera")
 books_spawn = NodePath("Books")
 cadernist = ExtResource("2_1p38k")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1276191903]
+modulate = Color(1, 1, 1, 0.19100001)
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CompressedTexture2D_1p38k")
+expand_mode = 1
 
 [node name="Books" type="Control" parent="." unique_id=403729230]
 layout_mode = 1
@@ -119,7 +137,7 @@ popup/item_1/id = 1
 [node name="ButtonsSup" type="Control" parent="Buttons/ButtonsContainer" unique_id=1954321105]
 layout_mode = 2
 mouse_filter = 2
-theme = SubResource("Theme_1p38k")
+theme = ExtResource("5_rro8m")
 
 [node name="Panel" type="Panel" parent="Buttons/ButtonsContainer/ButtonsSup" unique_id=434173045]
 custom_minimum_size = Vector2(0, 75)

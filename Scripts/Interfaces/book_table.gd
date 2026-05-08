@@ -48,7 +48,7 @@ func pass_count(count):
 	
 	var property = "Node"
 	for key in selected.keys():
-		selected[key][property].pass_page(count)
+		if selected[key].has(property): selected[key][property].pass_page(count)
 
 func return_page() -> void:
 	pass_count(-1)
