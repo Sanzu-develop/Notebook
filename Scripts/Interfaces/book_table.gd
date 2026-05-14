@@ -9,6 +9,9 @@ extends Control
 
 @export var all_notebooks : Array[Control]
 
+@export_group("UI")
+@export var UI : Dictionary[String,Node2D]
+
 
 func _ready() -> void:
 	await get_tree().process_frame
@@ -29,6 +32,8 @@ func _ready() -> void:
 
 func spawn_notebook(notebook_resource : NotebookData, key : String):
 	var cadern = SceneFactory.spawn(cadernist,books_spawn)
+
+	cadern.touching.connect(Callable(self,"cadernist_is_event"))
 
 	all_notebooks.append(cadern)
 
@@ -72,3 +77,17 @@ func _on_quit_pressed() -> void:
 		NotebookManager.select_notebook(path_name,true)
 	
 	NotebookManager.open_table("BookCase")
+
+
+# ----------
+# Viewer
+# ----------
+
+func cadernist_is_event(event : InputEvent) -> void:
+	var ui_name : String = "TouchViewer"
+	
+	if not UI.has(ui_name): return
+	
+	if event is InputEventScreenTouch:
+		var value = event.pressed
+		UI[ui_name].view_touch(value)

@@ -17,6 +17,9 @@ extends Panel
 
 var pages : Dictionary[int,Control] = {}
 
+signal touching(event : InputEvent)
+signal moving(event : InputEvent)
+
 
 func _gui_input(event: InputEvent) -> void:
 	# Ativa ou desativa a câmera
@@ -25,6 +28,7 @@ func _gui_input(event: InputEvent) -> void:
 		
 		camera_target.set_process_input(not event.pressed)
 		
+		touching.emit(event)
 		if event.pressed :
 			var parent = get_parent()
 			
@@ -35,6 +39,8 @@ func _gui_input(event: InputEvent) -> void:
 	# Move o caderno
 	if event is InputEventScreenDrag:
 		global_position += event.relative
+		
+		moving.emit(event)
 	
 
 func go_to(local : Vector2):
