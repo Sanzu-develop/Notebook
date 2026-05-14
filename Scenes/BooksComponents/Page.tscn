@@ -23,7 +23,7 @@ corner_detail = 5
 script = ExtResource("3_l4l87")
 metadata/_custom_type_script = "uid://rolbnwgo3ww4"
 
-[node name="Page" type="Panel" unique_id=926626765 node_paths=PackedStringArray("list_components")]
+[node name="Page" type="Panel" unique_id=926626765 node_paths=PackedStringArray("list_components", "texture_page")]
 custom_minimum_size = Vector2(500, 400)
 offset_right = 500.0
 offset_bottom = 400.0
@@ -32,6 +32,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_84ulh")
 script = ExtResource("1_rie4r")
 page = SubResource("Resource_hoyw1")
 list_components = NodePath("MaCo/ListComponents")
+texture_page = NodePath("")
 components = Dictionary[String, PackedScene]({
 "ComumLine": ExtResource("2_lxyae")
 })

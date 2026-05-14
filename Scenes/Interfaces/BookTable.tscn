@@ -178,11 +178,12 @@ text = "Save"
 layout_mode = 2
 text = "Quit"
 
-[node name="Control2" type="Control" parent="Buttons/ButtonsContainer" unique_id=1166976798]
+[node name="EditButtomGroup" type="Control" parent="Buttons/ButtonsContainer" unique_id=1166976798]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Panel" type="Panel" parent="Buttons/ButtonsContainer/Control2" unique_id=1122643832 node_paths=PackedStringArray("childs")]
+[node name="Panel" type="Panel" parent="Buttons/ButtonsContainer/EditButtomGroup" unique_id=1122643832 node_paths=PackedStringArray("childs")]
+visible = false
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -197,7 +198,7 @@ childs = {
 "OpenedButton": NodePath("MarginContainer/HFlowContainer/Open")
 }
 
-[node name="MarginContainer" type="MarginContainer" parent="Buttons/ButtonsContainer/Control2/Panel" unique_id=709106373]
+[node name="MarginContainer" type="MarginContainer" parent="Buttons/ButtonsContainer/EditButtomGroup/Panel" unique_id=709106373]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -209,27 +210,22 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="HFlowContainer" type="VBoxContainer" parent="Buttons/ButtonsContainer/Control2/Panel/MarginContainer" unique_id=1066461318]
+[node name="HFlowContainer" type="VBoxContainer" parent="Buttons/ButtonsContainer/EditButtomGroup/Panel/MarginContainer" unique_id=1066461318]
 layout_mode = 2
 alignment = 1
 
-[node name="Open" type="Button" parent="Buttons/ButtonsContainer/Control2/Panel/MarginContainer/HFlowContainer" unique_id=1388011410]
+[node name="Open" type="Button" parent="Buttons/ButtonsContainer/EditButtomGroup/Panel/MarginContainer/HFlowContainer" unique_id=1388011410]
 custom_minimum_size = Vector2(200, 25)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_t3gso")
 
-[node name="Control" type="Control" parent="Buttons/ButtonsContainer/Control2/Panel/MarginContainer/HFlowContainer" unique_id=1486189628]
-visible = false
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Buttons/ButtonsContainer/Control2/Panel/MarginContainer/HFlowContainer" unique_id=1609325378]
+[node name="HBoxContainer" type="HBoxContainer" parent="Buttons/ButtonsContainer/EditButtomGroup/Panel/MarginContainer/HFlowContainer" unique_id=1609325378]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
-[node name="Alignment" type="Button" parent="Buttons/ButtonsContainer/Control2/Panel/MarginContainer/HFlowContainer/HBoxContainer" unique_id=1192684825]
+[node name="Alignment" type="Button" parent="Buttons/ButtonsContainer/EditButtomGroup/Panel/MarginContainer/HFlowContainer/HBoxContainer" unique_id=1192684825]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 icon = ExtResource("7_sccdu")
@@ -238,7 +234,7 @@ icon_alignment = 1
 expand_icon = true
 script = ExtResource("9_t3gso")
 
-[node name="PanelContainer" type="PanelContainer" parent="Buttons/ButtonsContainer/Control2/Panel/MarginContainer/HFlowContainer/HBoxContainer/Alignment" unique_id=1850078219]
+[node name="PanelContainer" type="PanelContainer" parent="Buttons/ButtonsContainer/EditButtomGroup/Panel/MarginContainer/HFlowContainer/HBoxContainer/Alignment" unique_id=1850078219]
 visible = false
 custom_minimum_size = Vector2(100, 300)
 layout_mode = 0
@@ -246,10 +242,10 @@ offset_right = 100.0
 offset_bottom = 308.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_q4nxm")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Buttons/ButtonsContainer/Control2/Panel/MarginContainer/HFlowContainer/HBoxContainer/Alignment/PanelContainer" unique_id=705590972]
+[node name="VBoxContainer" type="VBoxContainer" parent="Buttons/ButtonsContainer/EditButtomGroup/Panel/MarginContainer/HFlowContainer/HBoxContainer/Alignment/PanelContainer" unique_id=705590972]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="Buttons/ButtonsContainer/Control2/Panel/MarginContainer/HFlowContainer/HBoxContainer/Alignment/PanelContainer/VBoxContainer" unique_id=294965530]
+[node name="Button" type="Button" parent="Buttons/ButtonsContainer/EditButtomGroup/Panel/MarginContainer/HFlowContainer/HBoxContainer/Alignment/PanelContainer/VBoxContainer" unique_id=294965530]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 icon = ExtResource("7_sccdu")
@@ -257,7 +253,7 @@ flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="Button2" type="Button" parent="Buttons/ButtonsContainer/Control2/Panel/MarginContainer/HFlowContainer/HBoxContainer/Alignment/PanelContainer/VBoxContainer" unique_id=1248885161]
+[node name="Button2" type="Button" parent="Buttons/ButtonsContainer/EditButtomGroup/Panel/MarginContainer/HFlowContainer/HBoxContainer/Alignment/PanelContainer/VBoxContainer" unique_id=1248885161]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 icon = ExtResource("8_t3gso")
@@ -265,7 +261,7 @@ flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="Button3" type="Button" parent="Buttons/ButtonsContainer/Control2/Panel/MarginContainer/HFlowContainer/HBoxContainer/Alignment/PanelContainer/VBoxContainer" unique_id=1354150754]
+[node name="Button3" type="Button" parent="Buttons/ButtonsContainer/EditButtomGroup/Panel/MarginContainer/HFlowContainer/HBoxContainer/Alignment/PanelContainer/VBoxContainer" unique_id=1354150754]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 icon = ExtResource("9_8xf2t")

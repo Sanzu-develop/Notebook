@@ -45,6 +45,25 @@ func spawn_notebook(notebook_resource : NotebookData, key : String):
 	cadern.go_to(cam.global_position)
 	cadern.load_notebook(notebook_resource,key)
 
+
+# ----------
+# Viewer
+# ----------
+
+func cadernist_is_event(event : InputEvent) -> void:
+	var ui_name : String = "TouchViewer"
+	
+	if not UI.has(ui_name): return
+	
+	if event is InputEventScreenTouch:
+		var value = event.pressed
+		UI[ui_name].view_touch(value)
+
+
+# ----------
+# ButtomSignal
+# ----------
+
 func pass_page() -> void:
 	pass_count(1)
 
@@ -77,17 +96,3 @@ func _on_quit_pressed() -> void:
 		NotebookManager.select_notebook(path_name,true)
 	
 	NotebookManager.open_table("BookCase")
-
-
-# ----------
-# Viewer
-# ----------
-
-func cadernist_is_event(event : InputEvent) -> void:
-	var ui_name : String = "TouchViewer"
-	
-	if not UI.has(ui_name): return
-	
-	if event is InputEventScreenTouch:
-		var value = event.pressed
-		UI[ui_name].view_touch(value)

@@ -1,13 +1,19 @@
 extends Panel
 
+signal finashed_atualize_data
+
 @export var page : PageData
+var page_id : int = -1
 
 @export_category("Intern")
 @export var list_components : HFlowContainer
+@export var texture_page : TextureRect
 
 @export_category("Packs")
 @export var components : Dictionary[String,PackedScene]
 @export var line_path : String = "res://Scenes/BooksComponents/Line.tscn"
+
+var tween : Tween
 
 func atualize_data():
 	var childs = list_components.get_children()
@@ -19,9 +25,12 @@ func atualize_data():
 		var notebook = childs[i]
 		
 		set_data_notebook_component(data,notebook)
+	
+	finashed_atualize_data.emit()
 
-func load_new_page(page_data : PageData):
+func load_new_page(page_data : PageData, new_page_id : int = 0):
 	page = page_data
+	pass_animation()
 	await get_tree().process_frame
 	create_itens()
 
@@ -111,3 +120,44 @@ func set_data_notebook_component(current_draw_resource : DrawObjectData, current
 func interval(value , min_value, max_value) -> bool:
 	if value >= min_value and value <= max_value: return true
 	return false
+
+# Animação de troca de folha
+func pass_animation():
+	set_texture_region()
+	texture_page.custom_minimum_size.x = self.size.x
+	
+	await finashed_atualize_data
+	
+	if tween: tween.kill()
+	tween = create_tween()
+	
+	tween.tween_property(texture_page,"custom_minimum_size:x",0.0,0.2)
+	tween.parallel().tween_property(texture_page,"size:x",0.0,0.2)
+
+func set_anchor_page(anchor : int):
+	if anchor == -1:
+		texture_page.set_anchors_preset(Control.PRESET_LEFT_WIDE)
+	elif anchor == 1:
+		texture_page.set_anchors_preset(Control.PRESET_RIGHT_WIDE)
+
+func set_texture_region():
+	var page_size = self.size
+	
+	var render = SubViewport.new()
+	render.size = Vector2i(page_size)
+	render.transparent_bg = true
+	render.render_target_update_mode = SubViewport.UPDATE_ONCE
+	
+	var screen_img = get_viewport().get_texture().get_image()
+	
+	var rect_page = get_global_rect()
+	
+	var img = screen_img.get_region(Rect2i(rect_page.position,rect_page.size))
+	#var viewport = get_viewport()
+	#var img = viewport.get_texture().get_image()
+	#var region : Rect2i = Rect2i(global_position,size)
+	#var tex = ImageTexture.create_from_image(img.get_region(region))
+	
+	var tex = ImageTexture.create_from_image(img)
+	
+	texture_page.texture = tex

@@ -23,9 +23,7 @@ func set_data(new_data : DrawObjectData):
 	run = true
 
 func interact(_new_text: String) -> void:
-	#print(new_text)
 	if run: 
 		run = false
 		data.text = self.text
-		#print("salvo. data : %s, texto : %s, texto do data : %s" % [data, self.text, data.text])
 		run = true
