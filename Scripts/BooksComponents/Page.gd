@@ -14,9 +14,14 @@ var page_id : int = -1
 @export var line_path : String = "res://Scenes/BooksComponents/Line.tscn"
 
 var tween : Tween
+var current_parent : Control = null
+
+func _ready() -> void:
+	tree_entered.connect(reparent_and_resize)
+	reparent_and_resize()
 
 func atualize_data():
-	var childs = list_components.get_children()
+	var childs = get_itens()
 	
 	for i in childs.size():
 		if i >= page.objects.size(): break
@@ -28,9 +33,9 @@ func atualize_data():
 	
 	finashed_atualize_data.emit()
 
-func load_new_page(page_data : PageData, new_page_id : int = 0):
+func load_new_page(page_data : PageData):#, new_page_id : int = 0):
 	page = page_data
-	pass_animation()
+	#pass_animation()
 	await get_tree().process_frame
 	create_itens()
 
@@ -70,6 +75,10 @@ func create_itens(per_frame := 4):
 		await get_tree().process_frame
 	
 	atualize_data()
+
+func get_itens() -> Array:
+	var itens = list_components.get_children()
+	return itens
 
 # Obter espaço disponível
 func get_space() -> float:
@@ -121,43 +130,54 @@ func interval(value , min_value, max_value) -> bool:
 	if value >= min_value and value <= max_value: return true
 	return false
 
+func reparent_and_resize():
+	if current_parent:
+		current_parent.resized.disconnect(resize_in_base_control)
+	
+	current_parent = MF.get_recursive_parent_control(self)
+	if current_parent:
+		current_parent.resized.connect(resize_in_base_control.bind(current_parent))
+
+func resize_in_base_control(control_node : Control) -> void:
+	if control_node: self.size = control_node.size
+
 # Animação de troca de folha
-func pass_animation():
-	set_texture_region()
-	texture_page.custom_minimum_size.x = self.size.x
-	
-	await finashed_atualize_data
-	
-	if tween: tween.kill()
-	tween = create_tween()
-	
-	tween.tween_property(texture_page,"custom_minimum_size:x",0.0,0.2)
-	tween.parallel().tween_property(texture_page,"size:x",0.0,0.2)
-
-func set_anchor_page(anchor : int):
-	if anchor == -1:
-		texture_page.set_anchors_preset(Control.PRESET_LEFT_WIDE)
-	elif anchor == 1:
-		texture_page.set_anchors_preset(Control.PRESET_RIGHT_WIDE)
-
-func set_texture_region():
-	var page_size = self.size
-	
-	var render = SubViewport.new()
-	render.size = Vector2i(page_size)
-	render.transparent_bg = true
-	render.render_target_update_mode = SubViewport.UPDATE_ONCE
-	
-	var screen_img = get_viewport().get_texture().get_image()
-	
-	var rect_page = get_global_rect()
-	
-	var img = screen_img.get_region(Rect2i(rect_page.position,rect_page.size))
-	#var viewport = get_viewport()
-	#var img = viewport.get_texture().get_image()
-	#var region : Rect2i = Rect2i(global_position,size)
-	#var tex = ImageTexture.create_from_image(img.get_region(region))
-	
-	var tex = ImageTexture.create_from_image(img)
-	
-	texture_page.texture = tex
+#func pass_animation():
+	#set_texture_region()
+	#texture_page.custom_minimum_size.x = self.size.x
+	#
+	#await finashed_atualize_data
+	#
+	#if tween: tween.kill()
+	#tween = create_tween()
+	#
+	#tween.tween_property(texture_page,"custom_minimum_size:x",0.0,0.2)
+	#tween.parallel().tween_property(texture_page,"size:x",0.0,0.2)
+#
+#func set_anchor_page(anchor : int):
+	#if anchor == -1:
+		#texture_page.set_anchors_preset(Control.PRESET_LEFT_WIDE)
+	#elif anchor == 1:
+		#texture_page.set_anchors_preset(Control.PRESET_RIGHT_WIDE)
+#
+#func set_texture_region():
+	#var page_size = self.size
+	#
+	#var render = SubViewport.new()
+	#render.size = Vector2i(page_size)
+	#render.transparent_bg = true
+	#render.render_target_update_mode = SubViewport.UPDATE_ONCE
+	#
+	#var screen_img = get_viewport().get_texture().get_image()
+	#
+	#var rect_page = get_global_rect()
+	#
+	#var img = screen_img.get_region(Rect2i(rect_page.position,rect_page.size))
+	##var viewport = get_viewport()
+	##var img = viewport.get_texture().get_image()
+	##var region : Rect2i = Rect2i(global_position,size)
+	##var tex = ImageTexture.create_from_image(img.get_region(region))
+	#
+	#var tex = ImageTexture.create_from_image(img)
+	#
+	#texture_page.texture = tex

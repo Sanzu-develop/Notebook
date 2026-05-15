@@ -28,6 +28,7 @@ boot_splash/image="uid://cmu1w01nya2ia"
 SceneFactory="*res://Global/SceneFactory.gd"
 FileManager="*res://Global/FileManager.gd"
 NotebookManager="*res://Global/NotebookManager.gd"
+MF="*uid://dg3prj0efb1h0"
 
 [display]
 

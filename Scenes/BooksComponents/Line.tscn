@@ -14,5 +14,3 @@ theme_override_styles/normal = ExtResource("1_r0xgq")
 theme_override_styles/focus = ExtResource("2_btrm1")
 deselect_on_focus_loss_enabled = false
 script = ExtResource("1_vxwgk")
-
-[connection signal="text_changed" from="." to="." method="interact"]

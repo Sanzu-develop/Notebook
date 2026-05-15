@@ -1,4 +1,5 @@
 extends Camera2D
+class_name SensitiveCam
 
 @export_group("Configurações")
 @export var sensibility_zoom := 0.005
@@ -6,7 +7,7 @@ extends Camera2D
 @export var zoom_min := 0.5
 @export var zoom_max := 3.0
 
-var enable_move_camera := false
+var enable_move_camera := true
 var touch_points := {} 
 var last_distance := 0.0
 
@@ -28,6 +29,8 @@ func _input(event: InputEvent) -> void:
 
 	# 2. MOVIMENTAÇÃO E PINÇA (ZOOM)
 	if event is InputEventScreenDrag:
+		if not enable_move_camera: return
+		
 		touch_points[event.index] = event.position
 
 		# ZOOM COM DOIS DEDOS (Pinça)

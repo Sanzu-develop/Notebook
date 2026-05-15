@@ -23,7 +23,20 @@ corner_detail = 5
 script = ExtResource("3_l4l87")
 metadata/_custom_type_script = "uid://rolbnwgo3ww4"
 
-[node name="Page" type="Panel" unique_id=926626765 node_paths=PackedStringArray("list_components", "texture_page")]
+[node name="SubViewportContainer" type="SubViewportContainer" unique_id=1178656876]
+custom_minimum_size = Vector2(500, 400)
+offset_right = 500.0
+offset_bottom = 400.0
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=588236886]
+transparent_bg = true
+handle_input_locally = false
+snap_2d_transforms_to_pixel = true
+size = Vector2i(500, 400)
+render_target_update_mode = 4
+
+[node name="Page" type="Panel" parent="SubViewport" unique_id=926626765 node_paths=PackedStringArray("list_components", "texture_page")]
 custom_minimum_size = Vector2(500, 400)
 offset_right = 500.0
 offset_bottom = 400.0
@@ -37,7 +50,7 @@ components = Dictionary[String, PackedScene]({
 "ComumLine": ExtResource("2_lxyae")
 })
 
-[node name="MaCo" type="MarginContainer" parent="." unique_id=1941859440]
+[node name="MaCo" type="MarginContainer" parent="SubViewport/Page" unique_id=1941859440]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -49,6 +62,9 @@ theme_override_constants/margin_top = 60
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 60
 
-[node name="ListComponents" type="HFlowContainer" parent="MaCo" unique_id=1320261529]
+[node name="ListComponents" type="HFlowContainer" parent="SubViewport/Page/MaCo" unique_id=1320261529]
 layout_mode = 2
 theme_override_constants/h_separation = 16384
+
+[node name="Camera2D" type="Camera2D" parent="SubViewport" unique_id=1026457617]
+anchor_mode = 0

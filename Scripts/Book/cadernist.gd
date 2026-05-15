@@ -17,6 +17,7 @@ extends Panel
 
 var pages : Dictionary[int,Control] = {}
 
+
 signal touching(event : InputEvent)
 signal moving(event : InputEvent)
 
@@ -40,8 +41,7 @@ func _gui_input(event: InputEvent) -> void:
 	if event is InputEventScreenDrag:
 		global_position += event.relative
 		
-		moving.emit(event)
-	
+		moving.emit(event)	
 
 func go_to(local : Vector2):
 	var current_offset := Vector2(-size.x / 2, size.y / 2)
@@ -85,7 +85,15 @@ func load_current_page():
 	pages[1].load_new_page(notebook.pages[current_page + 1])
 
 func create_page(page_id : int, parent : Control):
-	pages[page_id] = SceneFactory.spawn(Page.duplicate(true),parent)
+	var new_subviewport_container = SceneFactory.spawn(Page.duplicate(true),parent) as SubViewportContainer
+	var containers = new_subviewport_container.find_children("","Control",true,false)
+	
+	if containers.size() < 1:
+		new_subviewport_container.queue_free()
+		return
+	
+	pages[page_id] = containers[0]
+	pages[page_id].finashed_atualize_data.connect(cadernist_finashed_load.bind(page_id))
 	pages[page_id].load_new_page(notebook.pages[page_id])
 
 func delete_page(page_id : int):
@@ -124,3 +132,15 @@ func always_par(number : int, min_value := 0, max_value := notebook.pages.size()
 func pass_page(count : int):
 	var result = always_par(current_page + count * 2)
 	load_pages(result)
+
+func cadernist_finashed_load(id_page: int):
+	if id_page == 0:
+		var itens_0 = pages[0].get_itens()
+		var itens_1 = pages[1].get_itens()
+		
+		itens_0[itens_0.size() -1].focus_next = itens_1[0].get_path()
+	else:
+		var itens_0 = pages[0].get_itens()
+		var itens_1 = pages[1].get_itens()
+		
+		itens_1[itens_0.size() -1].focus_next = itens_0[0].get_path()
