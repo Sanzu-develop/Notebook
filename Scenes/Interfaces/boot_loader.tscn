@@ -1,0 +1,131 @@
+[gd_scene format=3 uid="uid://buo7u2xdjd640"]
+
+[ext_resource type="Texture2D" uid="uid://cmu1w01nya2ia" path="res://Icon/BootLoader.png" id="1_1ikht"]
+[ext_resource type="Script" uid="uid://ds4f3a1a5s28p" path="res://Scripts/InterfaceComponent/BootLoaderr.gd" id="1_fw82j"]
+[ext_resource type="Theme" uid="uid://cnuaxtbdw3i7" path="res://Styles/Interface/PaperTheme.tres" id="2_a2k72"]
+[ext_resource type="Script" uid="uid://b5ppqkcd2tso6" path="res://Scripts/Copyright/licença.gd" id="3_klhxa"]
+
+[node name="BootLoader" type="Control" unique_id=827968219 node_paths=PackedStringArray("UI")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fw82j")
+UI = {
+"confirm": NodePath("Consentment/MarginContainer/VBoxContainer/Confirm"),
+"first_image": NodePath("FirstImage"),
+"licence": NodePath("Consentment/MarginContainer/VBoxContainer/licenca"),
+"term": NodePath("Consentment/MarginContainer/VBoxContainer/termos")
+}
+
+[node name="BackGround" type="ColorRect" parent="." unique_id=271255887]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.54901963, 0.43137255, 0.32156864, 1)
+
+[node name="Consentment" type="Panel" parent="." unique_id=762503452]
+custom_minimum_size = Vector2(700, 600)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_a2k72")
+
+[node name="MarginContainer" type="MarginContainer" parent="Consentment" unique_id=902190292]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Consentment/MarginContainer" unique_id=2108647691]
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="Title" type="Label" parent="Consentment/MarginContainer/VBoxContainer" unique_id=319206386]
+layout_mode = 2
+text = "Por favor, Leia antes de prosseguir."
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Consentment/MarginContainer/VBoxContainer" unique_id=1747154471]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Consentment/MarginContainer/VBoxContainer/ScrollContainer" unique_id=1805529042]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="Termos" type="RichTextLabel" parent="Consentment/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=974855508]
+layout_mode = 2
+mouse_filter = 2
+text = "Termos de Uso e Consentimento do UsuárioTermos de Uso e Consentimento do Usuário
+
+​Bem-vindo ao Sistema de caderno digital!
+​Antes de começar a registrar suas ideias, aventuras e anotações, leia atentamente e confirme seu consentimento com os termos abaixo:
+​Licença de Uso: Este software é disponibilizado para uso pessoal. Todos os direitos de propriedade intelectual sobre o código, lógica de processamento de texto e interface permanecem reservados ao desenvolvedor.
+​Armazenamento de Dados: Ao utilizar o caderno, você concorda que o aplicativo criará e modificará arquivos locais no seu dispositivo para salvar suas notas. Suas anotações pertencem exclusivamente a você e são mantidas 100% offline; nenhuma informação pessoal ou de texto é coletada ou enviada a servidores externos.
+​Limitação de Responsabilidade: Esta ferramenta foi desenvolvida com o máximo de empenho e atenção técnica. Contudo, ela é fornecida \"como está\". O desenvolvedor não se responsabiliza por eventuais falhas do sistema operacional, interrupções ou perda acidental de dados decorrentes do encerramento inesperado do aplicativo.
+​Ao clicar em \"Aceitar\", você declara estar ciente e de acordo com estas condições, liberando o acesso total às funcionalidades do caderno. "
+fit_content = true
+autowrap_mode = 1
+
+[node name="Licença" type="RichTextLabel" parent="Consentment/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=2145856696]
+layout_mode = 2
+mouse_filter = 2
+fit_content = true
+autowrap_mode = 1
+script = ExtResource("3_klhxa")
+
+[node name="termos" type="CheckBox" parent="Consentment/MarginContainer/VBoxContainer" unique_id=1338110433]
+layout_mode = 2
+text = "Li e concordo com os presentes termos."
+
+[node name="licenca" type="CheckBox" parent="Consentment/MarginContainer/VBoxContainer" unique_id=1325405877]
+layout_mode = 2
+text = "Li e concordo com a licença deste software."
+
+[node name="Confirm" type="Button" parent="Consentment/MarginContainer/VBoxContainer" unique_id=1000219751]
+layout_mode = 2
+disabled = true
+text = "Prosseguir"
+
+[node name="Label" type="Label" parent="Consentment/MarginContainer/VBoxContainer" unique_id=1645889439]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.23921569, 0.16862746, 0.12156863, 1)
+theme_override_font_sizes/font_size = 16
+text = "Este trabalho está licenciado sob a Licença :
+Creative Commons Atribuição-NãoComercial-CompartilhaIgual 4.0 Internacional."
+
+[node name="FirstImage" type="TextureRect" parent="." unique_id=1962539081]
+z_index = 10
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_1ikht")
+expand_mode = 1

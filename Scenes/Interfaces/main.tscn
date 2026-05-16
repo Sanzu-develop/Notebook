@@ -2,7 +2,6 @@
 
 [ext_resource type="StyleBox" uid="uid://b1bj3hlyg5lko" path="res://Styles/Interface/Panel.tres" id="1_myesv"]
 [ext_resource type="Script" uid="uid://c2k0heroec6a" path="res://Scripts/Interfaces/main.gd" id="1_pof2f"]
-[ext_resource type="PackedScene" uid="uid://bf2wotbb7unu8" path="res://Scenes/InterfacesComponents/Button.tscn" id="2_c2jbf"]
 [ext_resource type="PackedScene" uid="uid://d8iwfctro38b" path="res://Scenes/InterfacesComponents/Book.tscn" id="2_w6wev"]
 [ext_resource type="Theme" uid="uid://cnuaxtbdw3i7" path="res://Styles/Interface/PaperTheme.tres" id="5_634wf"]
 [ext_resource type="Script" uid="uid://d3mcvs6ys1dih" path="res://Scripts/InterfaceComponent/create_cadern_panel.gd" id="6_dqpis"]
@@ -89,7 +88,7 @@ offset_left = -460.0
 grow_horizontal = 0
 grow_vertical = 2
 theme = ExtResource("5_634wf")
-theme_override_constants/margin_top = 30
+theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 60
 theme_override_constants/margin_bottom = 50
 
@@ -119,15 +118,15 @@ layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="Open" parent="PanelButtonsRight/VBoxContainer/Panel/MaCo/ListButton" unique_id=773510067 instance=ExtResource("2_c2jbf")]
+[node name="Open" type="Button" parent="PanelButtonsRight/VBoxContainer/Panel/MaCo/ListButton" unique_id=1896582763]
 layout_mode = 2
 text = "Abrir"
 
-[node name="Create" parent="PanelButtonsRight/VBoxContainer/Panel/MaCo/ListButton" unique_id=1080993120 instance=ExtResource("2_c2jbf")]
+[node name="Create" type="Button" parent="PanelButtonsRight/VBoxContainer/Panel/MaCo/ListButton" unique_id=812941904]
 layout_mode = 2
 text = "Criar"
 
-[node name="Delete" parent="PanelButtonsRight/VBoxContainer/Panel/MaCo/ListButton" unique_id=1533390771 instance=ExtResource("2_c2jbf")]
+[node name="Delete" type="Button" parent="PanelButtonsRight/VBoxContainer/Panel/MaCo/ListButton" unique_id=818176923]
 layout_mode = 2
 text = "Deletar"
 
@@ -241,7 +240,8 @@ theme_override_constants/margin_bottom = 10
 
 [node name="VersionLabel" type="Label" parent="Version" unique_id=620214490]
 layout_mode = 2
-text = "Versão : 0.0.1 alfha"
+text = "Versão : 0.0.2 alfha
+Copyright (c) 2026 Sanzu_dev - All rigthss reserved."
 label_settings = SubResource("LabelSettings_w6wev")
 horizontal_alignment = 1
 vertical_alignment = 1
