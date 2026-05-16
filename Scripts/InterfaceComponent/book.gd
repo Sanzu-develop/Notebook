@@ -1,5 +1,7 @@
 extends Button
 
+const COPYRIGHT = "Copyright (c) 2026 Sanzu_dev - All rigthss reserved."
+
 @export_category("Individuality")
 @export var named : StringName = "Caderneta"
 @export_category("text_label")

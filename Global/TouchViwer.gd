@@ -1,6 +1,8 @@
 extends AnimatedSprite2D
 class_name TouchViwer
 
+const COPYRIGHT = "Copyright (c) 2026 Sanzu_dev - All rigthss reserved."
+
 func _ready() -> void:
 	view_touch(false)
 

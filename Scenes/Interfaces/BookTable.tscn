@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://b24hra32iaw7" path="res://Scripts/Interfaces/book_table.gd" id="1_k7yof"]
 [ext_resource type="PackedScene" uid="uid://dlanoeaov7e2l" path="res://Scenes/Books/cadernist.tscn" id="2_1p38k"]
 [ext_resource type="Script" uid="uid://brylbtcymecsg" path="res://Scripts/Camera/camera.gd" id="2_k7yof"]
-[ext_resource type="Script" uid="uid://b0jst32huqnf" path="res://Global/NotebookManager.gd" id="4_rro8m"]
 [ext_resource type="Theme" uid="uid://duocja3dhftvk" path="res://Styles/Interface/Base_Superior_Editor.res" id="5_rro8m"]
 [ext_resource type="Script" uid="uid://c7o28qixu84y1" path="res://Scripts/InterfaceComponent/HiderPanel.gd" id="5_xr3ps"]
 [ext_resource type="Texture2D" uid="uid://b81yxa14kiu55" path="res://UI/UI_MovingCadern.png" id="6_j2fi3"]
@@ -88,7 +87,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
-script = ExtResource("4_rro8m")
 
 [node name="Mesa" type="CanvasLayer" parent="." unique_id=1080760565]
 layer = -1
@@ -287,3 +285,4 @@ script = ExtResource("2_k7yof")
 [connection signal="pressed" from="Buttons/ButtonsContainer/Page/Return" to="." method="return_page"]
 [connection signal="pressed" from="Buttons/ButtonsContainer/ButtonsSup/Panel/HBoxContainer/Save" to="." method="_on_save_pressed"]
 [connection signal="pressed" from="Buttons/ButtonsContainer/ButtonsSup/Panel/HBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="selected_item" from="Buttons/ButtonsContainer/EditButtomGroup/Panel/MarginContainer/HFlowContainer/HBoxContainer/Alignment" to="." method="_on_alignment_selected_item"]

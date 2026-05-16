@@ -1,6 +1,6 @@
 extends Control
 
-const configuration_path = "user://configuration.save"
+const COPYRIGHT = "Copyright (c) 2026 Sanzu_dev - All rigthss reserved."
 
 @export var UI : Dictionary[String,Control]
 
@@ -25,6 +25,9 @@ func _ready() -> void:
 	await tween.finished
 	
 	first_image.visible = false
+	
+	var accept_term = FileManager.get_setting("sistem","accept_term")
+	confirmation(accept_term)
 
 func get_ui(ui_key: String) -> Control:
 	var ui : Control
@@ -44,5 +47,16 @@ func verifiy_all_conditions() -> bool:
 	
 	return term_button.button_pressed and licence_button.button_pressed
 
-func confirmation():
-	if verifiy_all_conditions(): NotebookManager.open_table("BookCase")
+func confirmation(force_confirm : bool = false):
+	if verifiy_all_conditions() or force_confirm: 
+		if not force_confirm: 
+			FileManager.set_setting("sistem","accept_term",true)
+			FileManager.save_settings_to_disk()
+		NotebookManager.open_table("BookCase")
+	else: 
+		var consent = get_ui("consent")
+		if consent:
+			consent.modulate.a = 0.0
+			var tween = create_tween()
+			tween.tween_property(consent,"modulate:",1.0,0.75)
+		print("Accept all terms first")

@@ -1,5 +1,6 @@
 extends Control
 
+const COPYRIGHT = "Copyright (c) 2026 Sanzu_dev - All rigthss reserved."
 
 @export var cam : Camera2D
 
@@ -60,12 +61,11 @@ func cadernist_is_event(event : InputEvent) -> void:
 		UI[ui_name].view_touch(value)
 
 
+
 # ----------
-# ButtomSignal
+# Function of buttons
 # ----------
 
-func pass_page() -> void:
-	pass_count(1)
 
 func pass_count(count):
 	var selected = NotebookManager.get_current_select(-1)
@@ -73,12 +73,6 @@ func pass_count(count):
 	var property = "Node"
 	for key in selected.keys():
 		if selected[key].has(property): selected[key][property].pass_page(count)
-
-func return_page() -> void:
-	pass_count(-1)
-
-func _on_save_pressed() -> void:
-	save_current_notebook()
 
 func save_current_notebook():
 	var selected = NotebookManager.get_current_select(-1)
@@ -89,6 +83,29 @@ func save_current_notebook():
 		
 		NotebookManager.save_notebook(notebook,key,false)
 
+func modify_item(function: String, value: Variant):
+	var selected = NotebookManager.get_current_select(-1)
+	
+	var property = "Node"
+	for key in selected.keys():
+		if selected[key].has(property): 
+			var self_notebook = selected[key][property]
+			if self_notebook.has_method("modify_item"): self_notebook.modify_item(function,value)
+
+
+# ----------
+# ButtomSignal
+# ----------
+
+func pass_page() -> void:
+	pass_count(1)
+
+func return_page() -> void:
+	pass_count(-1)
+
+func _on_save_pressed() -> void:
+	save_current_notebook()
+
 func _on_quit_pressed() -> void:
 	for cadern in all_notebooks:
 		var path_name = cadern.path_name
@@ -96,3 +113,13 @@ func _on_quit_pressed() -> void:
 		NotebookManager.select_notebook(path_name,true)
 	
 	NotebookManager.open_table("BookCase")
+
+func _on_alignment_selected_item(index: int) -> void:
+	var convert : Dictionary[int,HorizontalAlignment] = {
+		0: HORIZONTAL_ALIGNMENT_LEFT,
+		1: HORIZONTAL_ALIGNMENT_CENTER,
+		2: HORIZONTAL_ALIGNMENT_RIGHT
+	}
+	
+	if convert.has(index):
+		modify_item("set_alignment",convert[index])

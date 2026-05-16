@@ -1,10 +1,13 @@
 extends Panel
 
+const COPYRIGHT = "Copyright (c) 2026 Sanzu_dev - All rigthss reserved."
+
 @export_category("Sets")
 @export var current_page := 0
 
 @export_category("Childs")
 @export var list_pages : HBoxContainer
+@export var name_notebook : LineEdit
 
 @export_category("Resources")
 @export var notebook : NotebookData
@@ -17,6 +20,7 @@ extends Panel
 
 var pages : Dictionary[int,Control] = {}
 
+var selected_pages : Array[int] = []
 
 signal touching(event : InputEvent)
 signal moving(event : InputEvent)
@@ -53,6 +57,7 @@ func go_to(local : Vector2):
 func load_notebook(new : NotebookData, new_path : String):
 	notebook = new#.duplicate(true)
 	path_name = new_path
+	name_notebook.text = notebook.name
 	
 	if not is_inside_tree(): await self.ready
 	
@@ -94,6 +99,7 @@ func create_page(page_id : int, parent : Control):
 	
 	pages[page_id] = containers[0]
 	pages[page_id].finashed_atualize_data.connect(cadernist_finashed_load.bind(page_id))
+	pages[page_id].focus.connect(select_page.bind(page_id))
 	pages[page_id].load_new_page(notebook.pages[page_id])
 
 func delete_page(page_id : int):
@@ -133,14 +139,57 @@ func pass_page(count : int):
 	var result = always_par(current_page + count * 2)
 	load_pages(result)
 
+func select_page(id: int, multiple : bool = false):
+	if pages.has(id):
+		if not multiple:
+			selected_pages.clear()
+			selected_pages.push_back(id)
+
+func modify_item(function: String, value: Variant):
+	var pages_ = get_pages_selecteds()
+	
+	for page in pages_:
+		if page.has_method("modify_item"):
+			page.modify_item(function,value)
+
 func cadernist_finashed_load(id_page: int):
-	if id_page == 0:
+	if pages.has(0) and pages.has(1):
 		var itens_0 = pages[0].get_itens()
 		var itens_1 = pages[1].get_itens()
 		
-		itens_0[itens_0.size() -1].focus_next = itens_1[0].get_path()
-	else:
-		var itens_0 = pages[0].get_itens()
-		var itens_1 = pages[1].get_itens()
+		var book_table = get_tree().current_scene
 		
-		itens_1[itens_0.size() -1].focus_next = itens_0[0].get_path()
+		if itens_0.size() > 0 and itens_1.size() > 0:
+			if id_page == 0:
+				var last_item_0 = itens_0[itens_0.size() - 1]
+				var first_item_1 = itens_1[0]
+				
+				last_item_0.focus_next = first_item_1.get_path()
+				first_item_1.focus_previous = last_item_0.get_path()
+			else:
+				var last_item_1 = itens_1[itens_1.size() - 1]
+				var first_item_0 = itens_0[0]
+				
+				var callable_pass = Callable(book_table,"pass_count").bind(1)
+				var callable_return = Callable(book_table,"pass_count").bind(-1)
+				
+				last_item_1.focus_next = first_item_0.get_path()
+				first_item_0.focus_previous = last_item_1.get_path()
+				
+				if not last_item_1.pass_item.is_connected(callable_pass):
+					last_item_1.pass_item.connect(callable_pass)
+				if not first_item_0.return_item.is_connected(callable_return):
+					first_item_0.return_item.connect(callable_return)
+
+func get_pages_selecteds() -> Array[Control]:
+	var selected_page : Array[Control] = []
+	
+	for page_id in selected_pages:
+		var page = pages[page_id]
+		selected_page.push_back(page)
+	
+	return selected_page
+
+func rename(text: String):
+	if name_notebook.text.length() >= 4:
+		notebook.name = name_notebook.text

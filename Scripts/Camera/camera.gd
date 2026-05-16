@@ -1,6 +1,8 @@
 extends Camera2D
 class_name SensitiveCam
 
+const COPYRIGHT = "Copyright (c) 2026 Sanzu_dev - All rigthss reserved."
+
 @export_group("Configurações")
 @export var sensibility_zoom := 0.005
 @export var sensibility_move := 1.0

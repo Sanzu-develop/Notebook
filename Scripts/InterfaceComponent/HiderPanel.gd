@@ -1,6 +1,8 @@
 extends Panel
 class_name HiderPanelV
 
+const COPYRIGHT = "Copyright (c) 2026 Sanzu_dev - All rigthss reserved."
+
 @export_group("Modifiers")
 @export var open : bool = false
 @export_range(-512.0,512.0) var max_y_open : float = 256.0

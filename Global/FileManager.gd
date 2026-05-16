@@ -1,9 +1,38 @@
 extends Node
 
+const COPYRIGHT = "Copyright (c) 2026 Sanzu_dev - All rigthss reserved."
+const CONFIG_PATH = "user://settings.cfg"
+
+# Dicionário na memória com os valores Padrão (Fallback)
+var config_data := {
+	"sistem": {
+		"accept_term": false,
+		"version": "0.0.2 Alpha"
+	},
+	"audio": {
+		"volume_geral": 1.0,
+		"mutado": false
+	},
+	"ui": {
+		"touch_viewer":{
+			"size":3.0
+		}
+	}
+}
 
 var paths := {"current" : null}
 var base_path := "user://"
-var version := "0.0.1"
+
+signal loaded
+
+
+# --------------------
+# AutoLoad
+# --------------------
+
+# Chamado quando o FileManager entra na árvore (Início do jogo)
+func _ready() -> void:
+	load_settings_from_disk()
 
 # --------------------
 # Pastas
@@ -120,3 +149,46 @@ func get_all_files(path : String) -> Dictionary:
 	dir.list_dir_end()
 	
 	return files
+
+
+# --------------------
+# Sistema de Configuração Centralizado
+# --------------------
+
+# Altera um valor na memória. Rápido e sem travar o jogo gravando em disco.
+func set_setting(section: String, key: String, value) -> void:
+	if not config_data.has(section):
+		config_data[section] = {}
+	config_data[section][key] = value
+
+# Pega um valor da memória. Se não existir, retorna o valor padrão fornecido.
+func get_setting(section: String, key: String, default_value = null):
+	if config_data.has(section) and config_data[section].has(key):
+		return config_data[section][key]
+	return default_value
+
+# Carrega o arquivo do disco para a memória
+func load_settings_from_disk() -> void:
+	if not FileAccess.file_exists(CONFIG_PATH):
+		# Se não existe, salva o padrão para criar o arquivo pela primeira vez
+		print("Not initial settings, creating ...")
+		save_settings_to_disk()
+		return
+
+	var cfg := ConfigFile.new()
+	if cfg.load(CONFIG_PATH) == OK:
+		for section in cfg.get_sections():
+			for key in cfg.get_section_keys(section):
+				set_setting(section, key, cfg.get_value(section, key))
+
+	loaded.emit()
+
+# Grava todo o estado atual da memória para o disco de uma vez só
+func save_settings_to_disk() -> bool:
+	var cfg := ConfigFile.new()
+	
+	# Passa tudo do dicionário para o objeto ConfigFile
+	for section in config_data:
+		for key in config_data[section]:
+			cfg.set_value(section, key, config_data[section][key])
+	return cfg.save(CONFIG_PATH) == OK

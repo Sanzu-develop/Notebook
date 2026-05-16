@@ -14,10 +14,11 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_fw82j")
 UI = {
-"confirm": NodePath("Consentment/MarginContainer/VBoxContainer/Confirm"),
+"confirm": NodePath("Consent/MarginContainer/VBoxContainer/Confirm"),
+"consent": NodePath("Consent"),
 "first_image": NodePath("FirstImage"),
-"licence": NodePath("Consentment/MarginContainer/VBoxContainer/licenca"),
-"term": NodePath("Consentment/MarginContainer/VBoxContainer/termos")
+"licence": NodePath("Consent/MarginContainer/VBoxContainer/licenca"),
+"term": NodePath("Consent/MarginContainer/VBoxContainer/termos")
 }
 
 [node name="BackGround" type="ColorRect" parent="." unique_id=271255887]
@@ -29,7 +30,8 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.54901963, 0.43137255, 0.32156864, 1)
 
-[node name="Consentment" type="Panel" parent="." unique_id=762503452]
+[node name="Consent" type="Panel" parent="." unique_id=762503452]
+modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(700, 600)
 layout_mode = 1
 anchors_preset = 8
@@ -45,7 +47,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_a2k72")
 
-[node name="MarginContainer" type="MarginContainer" parent="Consentment" unique_id=902190292]
+[node name="MarginContainer" type="MarginContainer" parent="Consent" unique_id=902190292]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -57,28 +59,28 @@ theme_override_constants/margin_top = 40
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 40
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Consentment/MarginContainer" unique_id=2108647691]
+[node name="VBoxContainer" type="VBoxContainer" parent="Consent/MarginContainer" unique_id=2108647691]
 layout_mode = 2
 theme_override_constants/separation = 15
 alignment = 1
 
-[node name="Title" type="Label" parent="Consentment/MarginContainer/VBoxContainer" unique_id=319206386]
+[node name="Title" type="Label" parent="Consent/MarginContainer/VBoxContainer" unique_id=319206386]
 layout_mode = 2
 text = "Por favor, Leia antes de prosseguir."
 horizontal_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Consentment/MarginContainer/VBoxContainer" unique_id=1747154471]
+[node name="ScrollContainer" type="ScrollContainer" parent="Consent/MarginContainer/VBoxContainer" unique_id=1747154471]
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Consentment/MarginContainer/VBoxContainer/ScrollContainer" unique_id=1805529042]
+[node name="VBoxContainer" type="VBoxContainer" parent="Consent/MarginContainer/VBoxContainer/ScrollContainer" unique_id=1805529042]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 15
 alignment = 1
 
-[node name="Termos" type="RichTextLabel" parent="Consentment/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=974855508]
+[node name="Termos" type="RichTextLabel" parent="Consent/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=974855508]
 layout_mode = 2
 mouse_filter = 2
 text = "Termos de Uso e Consentimento do UsuárioTermos de Uso e Consentimento do Usuário
@@ -92,27 +94,27 @@ text = "Termos de Uso e Consentimento do UsuárioTermos de Uso e Consentimento d
 fit_content = true
 autowrap_mode = 1
 
-[node name="Licença" type="RichTextLabel" parent="Consentment/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=2145856696]
+[node name="Licença" type="RichTextLabel" parent="Consent/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=2145856696]
 layout_mode = 2
 mouse_filter = 2
 fit_content = true
 autowrap_mode = 1
 script = ExtResource("3_klhxa")
 
-[node name="termos" type="CheckBox" parent="Consentment/MarginContainer/VBoxContainer" unique_id=1338110433]
+[node name="termos" type="CheckBox" parent="Consent/MarginContainer/VBoxContainer" unique_id=1338110433]
 layout_mode = 2
 text = "Li e concordo com os presentes termos."
 
-[node name="licenca" type="CheckBox" parent="Consentment/MarginContainer/VBoxContainer" unique_id=1325405877]
+[node name="licenca" type="CheckBox" parent="Consent/MarginContainer/VBoxContainer" unique_id=1325405877]
 layout_mode = 2
 text = "Li e concordo com a licença deste software."
 
-[node name="Confirm" type="Button" parent="Consentment/MarginContainer/VBoxContainer" unique_id=1000219751]
+[node name="Confirm" type="Button" parent="Consent/MarginContainer/VBoxContainer" unique_id=1000219751]
 layout_mode = 2
 disabled = true
 text = "Prosseguir"
 
-[node name="Label" type="Label" parent="Consentment/MarginContainer/VBoxContainer" unique_id=1645889439]
+[node name="Label" type="Label" parent="Consent/MarginContainer/VBoxContainer" unique_id=1645889439]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.23921569, 0.16862746, 0.12156863, 1)
 theme_override_font_sizes/font_size = 16

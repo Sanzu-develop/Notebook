@@ -1,6 +1,8 @@
 extends Node
 class_name Bath
 
+const COPYRIGHT = "Copyright (c) 2026 Sanzu_dev - All rigthss reserved."
+
 signal go
 
 func bath(init : int, end : int, per_frame : int = 4):

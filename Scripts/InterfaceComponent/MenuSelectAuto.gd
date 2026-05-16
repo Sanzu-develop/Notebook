@@ -1,6 +1,8 @@
 extends Button
 class_name MenuSelectAuto
 
+#"Copyright (c) 2026 Sanzu_dev - All rigthss reserved."
+
 signal selected_item(index : int)
 
 @export var distance : Vector2 = Vector2(0,-10.0)

@@ -1,5 +1,8 @@
 extends Panel
 
+const COPYRIGHT = "Copyright (c) 2026 Sanzu_dev - All rigthss reserved."
+
+signal focus
 signal finashed_atualize_data
 
 @export var page : PageData
@@ -13,12 +16,18 @@ var page_id : int = -1
 @export var components : Dictionary[String,PackedScene]
 @export var line_path : String = "res://Scenes/BooksComponents/Line.tscn"
 
+var selected_itens : Array[int] = []
+
 var tween : Tween
 var current_parent : Control = null
 
 func _ready() -> void:
 	tree_entered.connect(reparent_and_resize)
 	reparent_and_resize()
+
+func _gui_input(event: InputEvent) -> void:
+	if event is InputEventScreenTouch and event.pressed:
+		focus.emit()
 
 func atualize_data():
 	var childs = get_itens()
@@ -27,9 +36,11 @@ func atualize_data():
 		if i >= page.objects.size(): break
 		
 		var data = page.objects[i]
-		var notebook = childs[i]
+		var item = childs[i]
 		
-		set_data_notebook_component(data,notebook)
+		set_data_notebook_component(data,item)
+		
+		if item.has_signal("focus") and not item.focus.is_connected(select_item.bind(i)): item.focus.connect(select_item.bind(i))
 	
 	finashed_atualize_data.emit()
 
@@ -80,6 +91,10 @@ func get_itens() -> Array:
 	var itens = list_components.get_children()
 	return itens
 
+func get_item(id: int) -> Control:
+	var itens = get_itens()
+	return itens[id]
+
 # Obter espaço disponível
 func get_space() -> float:
 	var space_y = list_components.size.y
@@ -92,6 +107,25 @@ func get_space() -> float:
 		space_y -= space_occuped + v_separation
 	
 	return space_y
+
+# Dando as instruções pro no
+func set_data_notebook_component(current_draw_resource : DrawObjectData, current_object : Control):
+	current_object.set_data(current_draw_resource)
+
+func select_item(id: int, multiple: bool = false):
+	if not multiple:
+		selected_itens.clear()
+		selected_itens.push_back(id)
+
+func modify_item(function : String, value : Variant):
+	for i in selected_itens:
+		
+		var item : Control = get_item(i)
+		
+		if item.has_method(function): 
+			var callable : Callable = Callable(item,function).bind(value)
+			if callable.is_valid(): 
+				callable.call()
 
 # Recalcular espaço disponível
 func recalcule_space(item_size_y : float, current_space : float) -> float:
@@ -120,10 +154,6 @@ func force_child(new_child : PackedScene , parent : Control, positioned : int = 
 		old_node.queue_free()
 	
 	return final_child
-
-# Dando as instruções pro no
-func set_data_notebook_component(current_draw_resource : DrawObjectData, current_object : Control):
-	current_object.set_data(current_draw_resource)
 
 # Verifica se um valor está em um intervalo
 func interval(value , min_value, max_value) -> bool:

@@ -1,5 +1,7 @@
 extends Panel
 
+const COPYRIGHT = "Copyright (c) 2026 Sanzu_dev - All rigthss reserved."
+
 @export var line_name : LineEdit
 
 

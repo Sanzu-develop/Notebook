@@ -1,10 +1,16 @@
 extends LineEdit
 class_name ComumLine
 
+const COPYRIGHT = "Copyright (c) 2026 Sanzu_dev - All rigthss reserved."
+
 @export var data : DrawObjectData 
 var run : bool = true
 
 var ghost = char(8203)
+
+signal pass_item
+signal return_item
+signal focus
 
 func _ready() -> void:
 	# Importante conectar o sinal se não estiver no editor
@@ -34,24 +40,7 @@ func _on_focus_entered():
 	if self.text.is_empty():
 		self.text = ghost
 		caret_column = 1
-
-func set_data(new_data : DrawObjectData):
-	run = false
-	data = new_data
-	var parent = get_parent_control()
-	
-	self.text = data.text
-	self.alignment = data.alignment # Corrigido de .anchor para .alignment
-	self.add_theme_color_override("font_color", data.color)
-	
-	# Melhor usar o tamanho do parent para o resize
-	if data.resize and parent:
-		self.custom_minimum_size.x = parent.size.x
-	else:
-		self.custom_minimum_size = data.size
-		
-	self.z_index = data.z_index
-	run = true
+	focus.emit()
 
 func interact(_new_text: String) -> void:
 	if not run: return
@@ -72,6 +61,28 @@ func interact(_new_text: String) -> void:
 	
 	set_new_text(new_text, false)
 	self.caret_column = min(old_caret, self.text.length())
+
+func set_data(new_data : DrawObjectData):
+	run = false
+	data = new_data
+	var parent = get_parent_control()
+	
+	self.text = data.text
+	self.alignment = data.alignment # Corrigido de .anchor para .alignment
+	self.add_theme_color_override("font_color", data.color)
+	
+	# Melhor usar o tamanho do parent para o resize
+	if data.resize and parent:
+		self.custom_minimum_size.x = parent.size.x
+	else:
+		self.custom_minimum_size = data.size
+		
+	self.z_index = data.z_index
+	run = true
+
+func set_alignment(new_alignment : HorizontalAlignment):
+	self.alignment = new_alignment
+	data.alignment = self.alignment
 
 func set_new_text(new_text : String, last_caret: bool = true):
 	run = false # Trava para evitar loops de sinais
@@ -112,7 +123,9 @@ func text_width_in_max(target_text : String) -> Dictionary:
 	return result
 
 func pass_next_line(rest_text : String = ""):
-	var next = find_next_valid_focus()
+	#if focus_next: get_tree().current_scene.pass_page()
+	pass_item.emit()
+	var next = find_next_valid_focus() if not focus_next else get_node(focus_next)
 	if next is LineEdit: # Verifica se é um campo de texto
 		next.grab_focus()
 		
@@ -127,7 +140,9 @@ func pass_next_line(rest_text : String = ""):
 				next.text = novo_texto_proxima
 
 func return_previous_line():
-	var prev = find_prev_valid_focus()
+	#if focus_previous: get_tree().current_scene.return_page()
+	return_item.emit()
+	var prev = find_prev_valid_focus() if not focus_previous else get_node(focus_previous)
 	if prev is LineEdit:
 		prev.grab_focus()
 		

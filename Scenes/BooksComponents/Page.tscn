@@ -36,7 +36,7 @@ snap_2d_transforms_to_pixel = true
 size = Vector2i(500, 400)
 render_target_update_mode = 4
 
-[node name="Page" type="Panel" parent="SubViewport" unique_id=926626765 node_paths=PackedStringArray("list_components", "texture_page")]
+[node name="Page" type="Panel" parent="SubViewport" unique_id=926626765 node_paths=PackedStringArray("list_components")]
 custom_minimum_size = Vector2(500, 400)
 offset_right = 500.0
 offset_bottom = 400.0
@@ -45,7 +45,6 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_84ulh")
 script = ExtResource("1_rie4r")
 page = SubResource("Resource_hoyw1")
 list_components = NodePath("MaCo/ListComponents")
-texture_page = NodePath("")
 components = Dictionary[String, PackedScene]({
 "ComumLine": ExtResource("2_lxyae")
 })

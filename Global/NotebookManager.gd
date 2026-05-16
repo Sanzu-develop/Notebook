@@ -1,6 +1,7 @@
 extends Node
-
 # NotebookManager
+
+const COPYRIGHT = "Copyright (c) 2026 Sanzu_dev - All rigthss reserved."
 
 var base_path := "user://NoteBooks"
 

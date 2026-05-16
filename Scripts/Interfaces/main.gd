@@ -1,5 +1,7 @@
 extends Control
 
+const COPYRIGHT = "Copyright (c) 2026 Sanzu_dev - All rigthss reserved."
+
 @export_category("Modify")
 @export var max_line := 12
 @export var max_page := 20

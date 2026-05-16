@@ -20,7 +20,9 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
 
-[node name="Cadernist" type="Panel" unique_id=2165359 node_paths=PackedStringArray("list_pages")]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iuolp"]
+
+[node name="Cadernist" type="Panel" unique_id=2165359 node_paths=PackedStringArray("list_pages", "name_notebook")]
 clip_contents = true
 custom_minimum_size = Vector2(1200, 660)
 anchors_preset = 8
@@ -37,6 +39,7 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_sviko")
 script = ExtResource("1_fccmf")
 list_pages = NodePath("MaCo/ListPages")
+name_notebook = NodePath("NameNotebook")
 Page = ExtResource("2_iuolp")
 
 [node name="MaCo" type="MarginContainer" parent="." unique_id=880083535]
@@ -56,3 +59,22 @@ custom_minimum_size = Vector2(1200, 0)
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 1
+
+[node name="NameNotebook" type="LineEdit" parent="." unique_id=1742421212]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -55.5
+offset_right = 55.5
+offset_bottom = 34.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.94509804, 0.89411765, 0.81960785, 1)
+theme_override_colors/font_selected_color = Color(0.94509804, 0.89411765, 0.81960785, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_iuolp")
+text = "Cadernist"
+alignment = 1
+max_length = 20
+flat = true
+
+[connection signal="text_changed" from="NameNotebook" to="." method="rename"]

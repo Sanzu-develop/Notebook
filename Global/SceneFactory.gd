@@ -1,5 +1,7 @@
 extends Node
 
+const COPYRIGHT = "Copyright (c) 2026 Sanzu_dev - All rigthss reserved."
+
 var _cache : Dictionary = {}
 
 func get_scene(scene_or_path):

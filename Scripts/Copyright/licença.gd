@@ -1,5 +1,7 @@
 extends RichTextLabel
 
+const COPYRIGHT = "Copyright (c) 2026 Sanzu_dev - All rigthss reserved."
+
 const LICENCE = """Copyright (c) 2026 Sanzu_dev
 Projeto : Cadernist
 
