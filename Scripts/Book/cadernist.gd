@@ -2,20 +2,24 @@ extends Panel
 
 const COPYRIGHT = "Copyright (c) 2026 Sanzu_dev - All rigthss reserved."
 
-@export_category("Sets")
+@export_group("Sets")
 @export var current_page := 0
+@export var pages_alignment : Array[LayoutPreset]
 
-@export_category("Childs")
+@export_group("Childs")
 @export var list_pages : HBoxContainer
 @export var name_notebook : LineEdit
+@export_subgroup("Texture_pass_anim")
+@export var texture_page_left : Sprite2D
+@export var texture_page_right : TextureRect
 
-@export_category("Resources")
+@export_group("Resources")
 @export var notebook : NotebookData
 
-@export_category("Paths")
+@export_group("Paths")
 @export var path_name : String
 
-@export_category("Packs")
+@export_group("Packs")
 @export var Page : PackedScene
 
 var pages : Dictionary[int,Control] = {}
@@ -24,6 +28,7 @@ var selected_pages : Array[int] = []
 
 signal touching(event : InputEvent)
 signal moving(event : InputEvent)
+signal loading_finashed
 
 
 func _gui_input(event: InputEvent) -> void:
@@ -39,13 +44,24 @@ func _gui_input(event: InputEvent) -> void:
 			
 			parent.move_child(self,-1)
 			
+			self.scale = Vector2(0.95,0.95)
+			self.modulate.a = 0.8
+			
 			NotebookManager.select_notebook(path_name,false)
+		
+		else:
+			self.scale = Vector2(1.0,1.0)
+			self.modulate.a = 1.0
 
 	# Move o caderno
 	if event is InputEventScreenDrag:
 		global_position += event.relative
 		
 		moving.emit(event)	
+	
+	#var t = SubViewport.new()
+	
+	#t.get_texture().get_image()
 
 func go_to(local : Vector2):
 	var current_offset := Vector2(-size.x / 2, size.y / 2)
@@ -86,8 +102,10 @@ func load_pages(new_page : int):
 	#pass
 
 func load_current_page():
-	pages[0].load_new_page(notebook.pages[current_page])
-	pages[1].load_new_page(notebook.pages[current_page + 1])
+	pages[0].load_new_page(notebook.pages[current_page],current_page)
+	pages[1].load_new_page(notebook.pages[current_page + 1],current_page + 1)
+	
+	loading_finashed.emit()
 
 func create_page(page_id : int, parent : Control):
 	var new_subviewport_container = SceneFactory.spawn(Page.duplicate(true),parent) as SubViewportContainer
@@ -97,10 +115,12 @@ func create_page(page_id : int, parent : Control):
 		new_subviewport_container.queue_free()
 		return
 	
+	#new_subviewport_container.set_anchors_preset(pages_alignment[page_id])
+
 	pages[page_id] = containers[0]
 	pages[page_id].finashed_atualize_data.connect(cadernist_finashed_load.bind(page_id))
 	pages[page_id].focus.connect(select_page.bind(page_id))
-	pages[page_id].load_new_page(notebook.pages[page_id])
+	pages[page_id].load_new_page(notebook.pages[page_id],page_id)
 
 func delete_page(page_id : int):
 	pages[page_id].queue_free()
@@ -136,8 +156,49 @@ func always_par(number : int, min_value := 0, max_value := notebook.pages.size()
 	return number
 
 func pass_page(count : int):
+	#var sub_r = pages[1].get_parent() as SubViewport
+	#
+	#if sub_l and sub_r:
+		#var tex_l = sub_l.get_texture()
+		#var tex_r = sub_r.get_texture()
+		#
+		#texture_page_left.texture = tex_l
+		#texture_page_right.texture = tex_r
+	
 	var result = always_par(current_page + count * 2)
+	#
+	#var sub_c_l = sub_l.get_parent() as SubViewportContainer
+	#var sub_c_r = sub_r.get_parent() as SubViewportContainer
+	#
+	#var min_size_sl_x = sub_c_l.custom_minimum_size.x
+	#var min_size_sr_x = sub_c_r.custom_minimum_size.x
+#
+	#texture_page_left.custom_minimum_size.x = min_size_sl_x
+	#texture_page_right.custom_minimum_size.x = min_size_sr_x
+	#
+	#texture_page_left.z_index = 0
+	#texture_page_right.z_index = 0
+	
+	#anim_pages()
+	
 	load_pages(result)
+	
+	#await loading_finashed
+	#
+	#var tween = create_tween()
+	#
+	#if result > current_page:
+		#texture_page_right.z_index = 1
+		#
+		#sub_c_l.custom_minimum_size.x = 0
+		#
+		#tween.tween_property(texture_page_right,"custom_minimum_size:x",0.0,0.75)
+		#
+		#await tween.finished
+		#
+		#tween.tween_property(sub_c_l,"custom_minimum_size:x",min_size_sl_x,0.75)
+		#
+		#await tween.finished
 
 func select_page(id: int, multiple : bool = false):
 	if pages.has(id):
@@ -190,6 +251,19 @@ func get_pages_selecteds() -> Array[Control]:
 	
 	return selected_page
 
+#func anim_pages(passing: bool = true):
+	#var tween = create_tween()
+	#var sub_l = pages[0].get_parent() as SubViewport
+#
+	#var img = sub_l.get_texture().get_image()
+	#texture_page_left.global_position = sub_l.get_parent().global_position
+	#texture_page_left.texture = ImageTexture.create_from_image(img)
+	#texture_page_left.scale.x = 1.0
+	#
+	#tween.tween_property(texture_page_left,"scale:x",-1.0,0.5)
+	
+	#texture_page_left.modulate.a = 1.0
+
 func rename(text: String):
-	if name_notebook.text.length() >= 4:
+	if name_notebook.text.length() >= 1:
 		notebook.name = name_notebook.text

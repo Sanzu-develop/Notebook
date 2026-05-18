@@ -7,7 +7,7 @@ const CONFIG_PATH = "user://settings.cfg"
 var config_data := {
 	"sistem": {
 		"accept_term": false,
-		"version": "0.0.2 Alpha"
+		"version": "0.0.2 Demo Alpha"
 	},
 	"audio": {
 		"volume_geral": 1.0,
@@ -19,6 +19,8 @@ var config_data := {
 		}
 	}
 }
+
+var not_save_keys : Array[String] = ["version"]
 
 var paths := {"current" : null}
 var base_path := "user://"
@@ -179,7 +181,7 @@ func load_settings_from_disk() -> void:
 	if cfg.load(CONFIG_PATH) == OK:
 		for section in cfg.get_sections():
 			for key in cfg.get_section_keys(section):
-				set_setting(section, key, cfg.get_value(section, key))
+				if not not_save_keys.has(key): set_setting(section, key, cfg.get_value(section, key))
 
 	loaded.emit()
 
@@ -190,5 +192,5 @@ func save_settings_to_disk() -> bool:
 	# Passa tudo do dicionário para o objeto ConfigFile
 	for section in config_data:
 		for key in config_data[section]:
-			cfg.set_value(section, key, config_data[section][key])
+			if not not_save_keys.has(key): cfg.set_value(section, key, config_data[section][key])
 	return cfg.save(CONFIG_PATH) == OK

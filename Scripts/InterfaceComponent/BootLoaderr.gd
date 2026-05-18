@@ -20,7 +20,7 @@ func _ready() -> void:
 	await get_tree().process_frame
 	
 	var tween = create_tween()
-	tween.tween_property(first_image,"modulate:a",0.0,0.5).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(first_image,"modulate:a",0.0,1.0).set_ease(Tween.EASE_IN_OUT)
 
 	await tween.finished
 	
@@ -58,5 +58,5 @@ func confirmation(force_confirm : bool = false):
 		if consent:
 			consent.modulate.a = 0.0
 			var tween = create_tween()
-			tween.tween_property(consent,"modulate:",1.0,0.75)
+			tween.tween_property(consent,"modulate:a",1.0,0.75)
 		print("Accept all terms first")

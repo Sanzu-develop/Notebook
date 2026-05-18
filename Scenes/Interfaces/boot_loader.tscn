@@ -4,6 +4,12 @@
 [ext_resource type="Script" uid="uid://ds4f3a1a5s28p" path="res://Scripts/InterfaceComponent/BootLoaderr.gd" id="1_fw82j"]
 [ext_resource type="Theme" uid="uid://cnuaxtbdw3i7" path="res://Styles/Interface/PaperTheme.tres" id="2_a2k72"]
 [ext_resource type="Script" uid="uid://b5ppqkcd2tso6" path="res://Scripts/Copyright/licença.gd" id="3_klhxa"]
+[ext_resource type="Shader" uid="uid://dr4m3hidtk7c5" path="res://Shader/Interface/ForceUniqueColor.gdshader" id="5_mawr8"]
+[ext_resource type="Texture2D" uid="uid://urpp3twep7rk" path="res://icon.svg" id="6_avjw3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8t5x6"]
+shader = ExtResource("5_mawr8")
+shader_parameter/cor_alvo = Color(1, 0.7, 0.39999998, 1)
 
 [node name="BootLoader" type="Control" unique_id=827968219 node_paths=PackedStringArray("UI")]
 layout_mode = 3
@@ -120,6 +126,25 @@ theme_override_colors/font_color = Color(0.23921569, 0.16862746, 0.12156863, 1)
 theme_override_font_sizes/font_size = 16
 text = "Este trabalho está licenciado sob a Licença :
 Creative Commons Atribuição-NãoComercial-CompartilhaIgual 4.0 Internacional."
+
+[node name="Engine" type="MarginContainer" parent="." unique_id=76508229]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -158.0
+offset_top = -158.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="TextureRect" type="TextureRect" parent="Engine" unique_id=291815852]
+material = SubResource("ShaderMaterial_8t5x6")
+layout_mode = 2
+texture = ExtResource("6_avjw3")
 
 [node name="FirstImage" type="TextureRect" parent="." unique_id=1962539081]
 z_index = 10

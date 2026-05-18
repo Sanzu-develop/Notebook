@@ -23,6 +23,10 @@ corner_detail = 5
 script = ExtResource("3_l4l87")
 metadata/_custom_type_script = "uid://rolbnwgo3ww4"
 
+[sub_resource type="LabelSettings" id="LabelSettings_hoyw1"]
+font_size = 32
+font_color = Color(0.4509804, 0.30980393, 0.19215687, 1)
+
 [node name="SubViewportContainer" type="SubViewportContainer" unique_id=1178656876]
 custom_minimum_size = Vector2(500, 400)
 offset_right = 500.0
@@ -36,7 +40,7 @@ snap_2d_transforms_to_pixel = true
 size = Vector2i(500, 400)
 render_target_update_mode = 4
 
-[node name="Page" type="Panel" parent="SubViewport" unique_id=926626765 node_paths=PackedStringArray("list_components")]
+[node name="Page" type="Panel" parent="SubViewport" unique_id=926626765 node_paths=PackedStringArray("list_components", "page_id_label_l", "page_id_label_r")]
 custom_minimum_size = Vector2(500, 400)
 offset_right = 500.0
 offset_bottom = 400.0
@@ -45,6 +49,8 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_84ulh")
 script = ExtResource("1_rie4r")
 page = SubResource("Resource_hoyw1")
 list_components = NodePath("MaCo/ListComponents")
+page_id_label_l = NodePath("PgIdLeft")
+page_id_label_r = NodePath("PgIdRight")
 components = Dictionary[String, PackedScene]({
 "ComumLine": ExtResource("2_lxyae")
 })
@@ -64,6 +70,34 @@ theme_override_constants/margin_bottom = 60
 [node name="ListComponents" type="HFlowContainer" parent="SubViewport/Page/MaCo" unique_id=1320261529]
 layout_mode = 2
 theme_override_constants/h_separation = 16384
+
+[node name="PgIdRight" type="Label" parent="SubViewport/Page" unique_id=1350366829]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -45.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "1"
+label_settings = SubResource("LabelSettings_hoyw1")
+horizontal_alignment = 1
+
+[node name="PgIdLeft" type="Label" parent="SubViewport/Page" unique_id=361286076]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -45.0
+offset_right = 40.0
+grow_vertical = 0
+text = "1"
+label_settings = SubResource("LabelSettings_hoyw1")
+horizontal_alignment = 1
 
 [node name="Camera2D" type="Camera2D" parent="SubViewport" unique_id=1026457617]
 anchor_mode = 0

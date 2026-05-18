@@ -3,11 +3,16 @@
 [ext_resource type="Script" uid="uid://b24hra32iaw7" path="res://Scripts/Interfaces/book_table.gd" id="1_k7yof"]
 [ext_resource type="PackedScene" uid="uid://dlanoeaov7e2l" path="res://Scenes/Books/cadernist.tscn" id="2_1p38k"]
 [ext_resource type="Script" uid="uid://brylbtcymecsg" path="res://Scripts/Camera/camera.gd" id="2_k7yof"]
+[ext_resource type="Theme" uid="uid://dogjx2b0v51eu" path="res://Styles/Interface/UI.res" id="3_q4nxm"]
+[ext_resource type="Texture2D" uid="uid://kemwuke3jjh8" path="res://UI/UI_Pass.png" id="4_8twcb"]
+[ext_resource type="Texture2D" uid="uid://daktekunb6a1m" path="res://UI/UI_Return.png" id="5_0pmbt"]
 [ext_resource type="Theme" uid="uid://duocja3dhftvk" path="res://Styles/Interface/Base_Superior_Editor.res" id="5_rro8m"]
 [ext_resource type="Script" uid="uid://c7o28qixu84y1" path="res://Scripts/InterfaceComponent/HiderPanel.gd" id="5_xr3ps"]
 [ext_resource type="Texture2D" uid="uid://b81yxa14kiu55" path="res://UI/UI_MovingCadern.png" id="6_j2fi3"]
+[ext_resource type="Texture2D" uid="uid://b86sjsa3wa0bx" path="res://UI/UI_Save.png" id="7_0pmbt"]
 [ext_resource type="Script" uid="uid://bxoeun1sv4qww" path="res://Global/TouchViwer.gd" id="7_rs34h"]
 [ext_resource type="Texture2D" uid="uid://c6b5kkc7qasfo" path="res://UI/UI_LeftAligment.png" id="7_sccdu"]
+[ext_resource type="Texture2D" uid="uid://lugvf7nhw4jq" path="res://UI/UI_Back.png" id="8_sb7ai"]
 [ext_resource type="Texture2D" uid="uid://hle5u8coayai" path="res://UI/UI_CenterAligment.png" id="8_t3gso"]
 [ext_resource type="Texture2D" uid="uid://xt2n0t7w7dxf" path="res://UI/UI_RightAligment.png" id="9_8xf2t"]
 [ext_resource type="Script" uid="uid://cfo1pvnu288yw" path="res://Scripts/InterfaceComponent/MenuSelectAuto.gd" id="9_t3gso"]
@@ -19,8 +24,6 @@ load_path = "res://.godot/imported/Icon.png-da58a5c6d89c120476e4c1572984e165.cte
 bg_color = Color(0.6, 0.6666667, 0.6, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1p38k"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t3gso"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q4nxm"]
 
@@ -103,12 +106,14 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_kprgi")
 [node name="Buttons" type="CanvasLayer" parent="." unique_id=1471400634]
 
 [node name="ButtonsContainer" type="MarginContainer" parent="Buttons" unique_id=2114763820]
+texture_filter = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme = ExtResource("3_q4nxm")
 theme_override_constants/margin_left = 30
 theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 30
@@ -131,6 +136,10 @@ offset_top = -50.0
 offset_bottom = 50.0
 grow_horizontal = 0
 grow_vertical = 2
+icon = ExtResource("4_8twcb")
+flat = true
+icon_alignment = 1
+expand_icon = true
 
 [node name="Return" type="Button" parent="Buttons/ButtonsContainer/Page" unique_id=386944660]
 custom_minimum_size = Vector2(100, 100)
@@ -142,6 +151,10 @@ offset_top = -50.0
 offset_right = 100.0
 offset_bottom = 50.0
 grow_vertical = 2
+icon = ExtResource("5_0pmbt")
+flat = true
+icon_alignment = 1
+expand_icon = true
 
 [node name="ButtonsSup" type="Control" parent="Buttons/ButtonsContainer" unique_id=1954321105]
 layout_mode = 2
@@ -169,12 +182,20 @@ mouse_filter = 2
 alignment = 2
 
 [node name="Save" type="Button" parent="Buttons/ButtonsContainer/ButtonsSup/Panel/HBoxContainer" unique_id=1718778523]
+custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
-text = "Save"
+icon = ExtResource("7_0pmbt")
+flat = true
+icon_alignment = 1
+expand_icon = true
 
 [node name="Quit" type="Button" parent="Buttons/ButtonsContainer/ButtonsSup/Panel/HBoxContainer" unique_id=286577850]
+custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
-text = "Quit"
+icon = ExtResource("8_sb7ai")
+flat = true
+icon_alignment = 1
+expand_icon = true
 
 [node name="EditButtomGroup" type="Control" parent="Buttons/ButtonsContainer" unique_id=1166976798]
 layout_mode = 2
@@ -214,7 +235,8 @@ alignment = 1
 [node name="Open" type="Button" parent="Buttons/ButtonsContainer/EditButtomGroup/Panel/MarginContainer/HFlowContainer" unique_id=1388011410]
 custom_minimum_size = Vector2(200, 25)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_t3gso")
+icon_alignment = 1
+expand_icon = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Buttons/ButtonsContainer/EditButtomGroup/Panel/MarginContainer/HFlowContainer" unique_id=1609325378]
 layout_mode = 2
@@ -223,6 +245,7 @@ size_flags_vertical = 3
 alignment = 1
 
 [node name="Alignment" type="Button" parent="Buttons/ButtonsContainer/EditButtomGroup/Panel/MarginContainer/HFlowContainer/HBoxContainer" unique_id=1192684825]
+texture_filter = 1
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 icon = ExtResource("7_sccdu")

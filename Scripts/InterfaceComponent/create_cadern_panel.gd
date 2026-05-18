@@ -14,7 +14,7 @@ func rename_pressed(_new_text: String) -> void:
 func create():
 	var value = line_name.text.length()
 	
-	if value < 4 : return
+	if value < 1 : return
 	
 	NotebookManager.generete_cadern(line_name.text)
 	

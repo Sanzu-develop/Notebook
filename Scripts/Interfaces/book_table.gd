@@ -115,11 +115,11 @@ func _on_quit_pressed() -> void:
 	NotebookManager.open_table("BookCase")
 
 func _on_alignment_selected_item(index: int) -> void:
-	var convert : Dictionary[int,HorizontalAlignment] = {
+	var converter : Dictionary[int,HorizontalAlignment] = {
 		0: HORIZONTAL_ALIGNMENT_LEFT,
 		1: HORIZONTAL_ALIGNMENT_CENTER,
 		2: HORIZONTAL_ALIGNMENT_RIGHT
 	}
 	
-	if convert.has(index):
-		modify_item("set_alignment",convert[index])
+	if converter.has(index):
+		modify_item("set_alignment",converter[index])

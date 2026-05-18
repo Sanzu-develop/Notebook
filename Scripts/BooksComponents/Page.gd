@@ -10,7 +10,8 @@ var page_id : int = -1
 
 @export_category("Intern")
 @export var list_components : HFlowContainer
-@export var texture_page : TextureRect
+@export var page_id_label_l : Label
+@export var page_id_label_r : Label
 
 @export_category("Packs")
 @export var components : Dictionary[String,PackedScene]
@@ -44,9 +45,21 @@ func atualize_data():
 	
 	finashed_atualize_data.emit()
 
-func load_new_page(page_data : PageData):#, new_page_id : int = 0):
+func load_new_page(page_data : PageData, id: int):#, new_page_id : int = 0):
 	page = page_data
-	#pass_animation()
+	page_id = id
+	var page_id_label
+	if page_id % 2 == 0:
+		page_id_label = page_id_label_l
+		page_id_label.visible = true
+		page_id_label_r.visible = false
+	else:
+		page_id_label = page_id_label_r
+		page_id_label.visible = true
+		page_id_label_l.visible = false
+	
+	page_id_label.text = str(page_id)
+	
 	await get_tree().process_frame
 	create_itens()
 
@@ -116,6 +129,8 @@ func select_item(id: int, multiple: bool = false):
 	if not multiple:
 		selected_itens.clear()
 		selected_itens.push_back(id)
+	
+	focus.emit()
 
 func modify_item(function : String, value : Variant):
 	for i in selected_itens:
